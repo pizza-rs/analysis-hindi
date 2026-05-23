@@ -1,50 +1,67 @@
-# pizza-analysis-hindi
+<div align="center">
 
-Hindi language analysis with Indic normalization, Hindi-specific normalization, stemming, and stop words.
+# 🇮🇳 pizza-analysis-hindi
 
-Part of the [Pizza](https://pizza.rs) search engine.
+**Hindi text analysis plugin for [INFINI Pizza](https://pizza.rs)**
+
+[![Crate](https://img.shields.io/badge/crate-pizza--analysis--hindi-blue)](https://github.com/pizza-rs/analysis-hindi)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
+</div>
+
+---
+
+## Overview
+
+Hindi/Devanagari language analysis with Indic script normalization, Hindi-specific
+normalization, light stemming, and stop words.
 
 ## Components
 
-| Name | Type | Description |
-|------|------|-------------|
-| `indic_normalization` | Token Filter | Shared Indic normalization — nukta forms, zero-width characters |
-| `hindi_normalization` | Token Filter | Hindi-specific character normalization |
-| `hindi_stem` | Token Filter | Hindi light stemmer — removes common suffixes |
-| `hindi_stop` | Token Filter | Hindi stop words filter (225 words) |
-| `hindi` | Analyzer | Full pipeline: indic_normalization → hindi_normalization → stop → stem |
+| Type | Name | Description |
+|:-----|:-----|:------------|
+| TokenFilter | `indic_normalization` | Normalize Indic script diacritics |
+| TokenFilter | `hindi_normalization` | Hindi-specific character equivalences |
+| TokenFilter | `hindi_stem` | Hindi light stemmer (suffix removal) |
+| TokenFilter | `hindi_stop` | Hindi stop words (225 entries) |
+| Analyzer | `hindi` | Full pipeline: lowercase → indic_norm → hindi_norm → stem → stop |
 
-## Usage
+### Normalization
 
-### Built-in Analyzer
+- **Indic**: Handles Nukta composites, visarga, and cross-script canonical equivalents
+- **Hindi**: Normalizes Devanagari variants (chandrabindu, anusvara equivalents)
 
-```json
-{
-  "analyzer": {
-    "type": "hindi"
-  }
-}
+## Example
+
+```rust
+use pizza_engine::analysis::AnalysisFactory;
+
+let mut factory = AnalysisFactory::new();
+pizza_analysis_hindi::register_all(&mut factory);
+
+let analyzer = factory.get_analyzer("hindi").unwrap();
 ```
 
-### Custom Pipeline
+## Installation
 
-```json
-{
-  "analyzer": {
-    "type": "custom",
-    "tokenizer": "standard",
-    "filter": ["indic_normalization", "hindi_normalization", "hindi_stem", "hindi_stop"]
-  }
-}
+```toml
+[dependencies]
+pizza-analysis-hindi = "0.1"
+```
+
+Or via `pizza-analysis-all`:
+
+```toml
+[dependencies]
+pizza-analysis-all = { version = "0.1", features = ["hindi"] }
 ```
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT
 
-## Related Crates
+---
 
-- [analysis-core](https://github.com/pizza-rs/analysis-core) — Core analysis components and pipeline
-- [analysis-icu](https://github.com/pizza-rs/analysis-icu) — ICU Unicode normalization and tokenization
-- [analysis-english](https://github.com/pizza-rs/analysis-english) — English analysis
-- [analysis-all](https://github.com/pizza-rs/analysis-all) — Meta-crate registering all analyzers
+<div align="center">
+<sub>Part of the <a href="https://pizza.rs">INFINI Pizza</a> ecosystem</sub>
+</div>
