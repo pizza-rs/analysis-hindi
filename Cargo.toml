@@ -2,7 +2,7 @@
 name = "pizza-analysis-hindi"
 version = "0.1.0"
 edition = "2021"
-description = "Hindi language analysis components for Pizza search engine"
+description = "Hindi text analysis plugin for INFINI Pizza"
 license = "MIT"
 
 [features]
