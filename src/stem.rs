@@ -47,7 +47,9 @@ fn stem_hindi(word: &str, len: usize) -> String {
     if len > 5 {
         let suffix4: String = chars[len - 4..].iter().collect();
         match suffix4.as_str() {
-            "ाइयाँ" | "ाइयों" | "ियोंने" => return chars[..len - 4].iter().collect(),
+            "ाइयाँ" | "ाइयों" | "ियोंने" => {
+                return chars[..len - 4].iter().collect()
+            }
             _ => {}
         }
     }
@@ -56,8 +58,9 @@ fn stem_hindi(word: &str, len: usize) -> String {
     if len > 4 {
         let suffix3: String = chars[len - 3..].iter().collect();
         match suffix3.as_str() {
-            "ियाँ" | "ियों" | "ाओं" | "ाएँ" | "ाईं" | "ाएं"
-            | "ोंने" | "ेंगे" | "ेंगी" => return chars[..len - 3].iter().collect(),
+            "ियाँ" | "ियों" | "ाओं" | "ाएँ" | "ाईं" | "ाएं" | "ोंने" | "ेंगे" | "ेंगी" => {
+                return chars[..len - 3].iter().collect()
+            }
             _ => {}
         }
     }
@@ -66,9 +69,8 @@ fn stem_hindi(word: &str, len: usize) -> String {
     if len > 3 {
         let suffix2: String = chars[len - 2..].iter().collect();
         match suffix2.as_str() {
-            "ों" | "ें" | "ाँ" | "ीं" | "ाई" | "ाए" | "ने"
-            | "नी" | "ना" | "ते" | "ती" | "ता" | "ीय" | "ेगा"
-            | "ेगी" | "ाक" | "ाप" | "ाव" | "कर" => {
+            "ों" | "ें" | "ाँ" | "ीं" | "ाई" | "ाए" | "ने" | "नी" | "ना" | "ते" | "ती" | "ता" | "ीय"
+            | "ेगा" | "ेगी" | "ाक" | "ाप" | "ाव" | "कर" => {
                 return chars[..len - 2].iter().collect();
             }
             _ => {}

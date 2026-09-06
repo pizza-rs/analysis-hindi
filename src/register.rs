@@ -19,8 +19,14 @@ use crate::stop::HindiStopFilter;
 /// - `"hindi_stem"` token filter
 /// - `"hindi_stop"` token filter
 pub fn register_all(factory: &mut AnalysisFactory) {
-    factory.register_token_filter("indic_normalization", Box::new(IndicNormalizationFilter::new()));
-    factory.register_token_filter("hindi_normalization", Box::new(HindiNormalizationFilter::new()));
+    factory.register_token_filter(
+        "indic_normalization",
+        Box::new(IndicNormalizationFilter::new()),
+    );
+    factory.register_token_filter(
+        "hindi_normalization",
+        Box::new(HindiNormalizationFilter::new()),
+    );
     factory.register_token_filter("hindi_stem", Box::new(HindiStemFilter::new()));
     factory.register_token_filter("hindi_stop", Box::new(HindiStopFilter::new()));
 
